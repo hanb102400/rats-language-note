@@ -1,0 +1,1748 @@
+Terminals unused in grammar
+
+   LP
+   RP
+
+
+State 48 conflicts: 13 shift/reduce
+State 49 conflicts: 13 shift/reduce
+State 50 conflicts: 13 shift/reduce
+State 51 conflicts: 13 shift/reduce
+State 52 conflicts: 13 shift/reduce
+State 53 conflicts: 13 shift/reduce
+State 54 conflicts: 13 shift/reduce
+State 55 conflicts: 13 shift/reduce
+State 56 conflicts: 13 shift/reduce
+State 57 conflicts: 13 shift/reduce
+State 58 conflicts: 13 shift/reduce
+State 59 conflicts: 13 shift/reduce
+State 60 conflicts: 13 shift/reduce
+State 61 conflicts: 13 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: statement_list
+
+    2 block: LC statement_list RC
+
+    3 statement_list: statement
+    4               | statement_list statement
+
+    5 statement: puts_statemnt
+    6          | declare_statement
+    7          | if_statement
+    8          | for_statement
+    9          | expression '\n'
+
+   10 declare_statement: VAR identifier COLON type
+   11                  | VAR identifier COLON type ASSIGN expression
+
+   12 type: INT
+   13     | DOUBLE
+   14     | STRING
+
+   15 if_statement: IF if_header block elseif_list ELSE block
+
+   16 if_header: expression
+
+   17 elseif_list: %empty
+   18            | elseif_list elseif
+
+   19 elseif: ELSE IF if_header block
+
+   20 for_statement: FOR for_header block
+
+   21 for_header: expression SEMI expression SEMI expression
+
+   22 puts_statemnt: PUTS expression
+
+   23 expression: assign_expression
+   24           | expression MUL expression
+   25           | expression DIV expression
+   26           | expression MOD expression
+   27           | expression ADD expression
+   28           | expression SUB expression
+   29           | expression LT expression
+   30           | expression LE expression
+   31           | expression GT expression
+   32           | expression GE expression
+   33           | expression EQ expression
+   34           | expression NE expression
+   35           | expression AND expression
+   36           | expression OR expression
+   37           | value_expression
+
+   38 assign_expression: identifier ASSIGN expression
+
+   39 value_expression: INTEGER_LITERAL
+   40                 | DOUBLE_LITERAL
+   41                 | STRING_LITERAL
+   42                 | identifier
+
+   43 identifier: IDENTIFIER
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'\n' (10) 9
+error (256)
+ADD (258) 27
+SUB (259) 28
+MUL (260) 24
+DIV (261) 25
+MOD (262) 26
+EQ (263) 33
+NE (264) 34
+GT (265) 31
+GE (266) 32
+LT (267) 29
+LE (268) 30
+AND (269) 35
+OR (270) 36
+SEMI (271) 21
+COLON (272) 10 11
+ASSIGN (273) 11 38
+LP (274)
+RP (275)
+LC (276) 2
+RC (277) 2
+VAR (278) 10 11
+IF (279) 15 19
+ELSE (280) 15 19
+FOR (281) 20
+INT (282) 12
+DOUBLE (283) 13
+STRING (284) 14
+PUTS (285) 22
+IDENTIFIER (286) 43
+INTEGER_LITERAL (287) 39
+DOUBLE_LITERAL (288) 40
+STRING_LITERAL (289) 41
+
+
+Nonterminals, with rules where they appear
+
+$accept (36)
+    on left: 0
+program (37)
+    on left: 1, on right: 0
+block (38)
+    on left: 2, on right: 15 19 20
+statement_list (39)
+    on left: 3 4, on right: 1 2 4
+statement (40)
+    on left: 5 6 7 8 9, on right: 3 4
+declare_statement (41)
+    on left: 10 11, on right: 6
+type (42)
+    on left: 12 13 14, on right: 10 11
+if_statement (43)
+    on left: 15, on right: 7
+if_header (44)
+    on left: 16, on right: 15 19
+elseif_list (45)
+    on left: 17 18, on right: 15 18
+elseif (46)
+    on left: 19, on right: 18
+for_statement (47)
+    on left: 20, on right: 8
+for_header (48)
+    on left: 21, on right: 20
+puts_statemnt (49)
+    on left: 22, on right: 5
+expression (50)
+    on left: 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37, on right:
+    9 11 16 21 22 24 25 26 27 28 29 30 31 32 33 34 35 36 38
+assign_expression (51)
+    on left: 38, on right: 23
+value_expression (52)
+    on left: 39 40 41 42, on right: 37
+identifier (53)
+    on left: 43, on right: 10 11 38 42
+
+
+State 0
+
+    0 $accept: . program $end
+
+    VAR              shift, and go to state 1
+    IF               shift, and go to state 2
+    FOR              shift, and go to state 3
+    PUTS             shift, and go to state 4
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    program            go to state 9
+    statement_list     go to state 10
+    statement          go to state 11
+    declare_statement  go to state 12
+    if_statement       go to state 13
+    for_statement      go to state 14
+    puts_statemnt      go to state 15
+    expression         go to state 16
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 1
+
+   10 declare_statement: VAR . identifier COLON type
+   11                  | VAR . identifier COLON type ASSIGN expression
+
+    IDENTIFIER  shift, and go to state 5
+
+    identifier  go to state 20
+
+
+State 2
+
+   15 if_statement: IF . if_header block elseif_list ELSE block
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    if_header          go to state 21
+    expression         go to state 22
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 3
+
+   20 for_statement: FOR . for_header block
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    for_header         go to state 23
+    expression         go to state 24
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 4
+
+   22 puts_statemnt: PUTS . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 25
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 5
+
+   43 identifier: IDENTIFIER .
+
+    $default  reduce using rule 43 (identifier)
+
+
+State 6
+
+   39 value_expression: INTEGER_LITERAL .
+
+    $default  reduce using rule 39 (value_expression)
+
+
+State 7
+
+   40 value_expression: DOUBLE_LITERAL .
+
+    $default  reduce using rule 40 (value_expression)
+
+
+State 8
+
+   41 value_expression: STRING_LITERAL .
+
+    $default  reduce using rule 41 (value_expression)
+
+
+State 9
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 26
+
+
+State 10
+
+    1 program: statement_list .
+    4 statement_list: statement_list . statement
+
+    VAR              shift, and go to state 1
+    IF               shift, and go to state 2
+    FOR              shift, and go to state 3
+    PUTS             shift, and go to state 4
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    $default  reduce using rule 1 (program)
+
+    statement          go to state 27
+    declare_statement  go to state 12
+    if_statement       go to state 13
+    for_statement      go to state 14
+    puts_statemnt      go to state 15
+    expression         go to state 16
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 11
+
+    3 statement_list: statement .
+
+    $default  reduce using rule 3 (statement_list)
+
+
+State 12
+
+    6 statement: declare_statement .
+
+    $default  reduce using rule 6 (statement)
+
+
+State 13
+
+    7 statement: if_statement .
+
+    $default  reduce using rule 7 (statement)
+
+
+State 14
+
+    8 statement: for_statement .
+
+    $default  reduce using rule 8 (statement)
+
+
+State 15
+
+    5 statement: puts_statemnt .
+
+    $default  reduce using rule 5 (statement)
+
+
+State 16
+
+    9 statement: expression . '\n'
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD   shift, and go to state 28
+    SUB   shift, and go to state 29
+    MUL   shift, and go to state 30
+    DIV   shift, and go to state 31
+    MOD   shift, and go to state 32
+    EQ    shift, and go to state 33
+    NE    shift, and go to state 34
+    GT    shift, and go to state 35
+    GE    shift, and go to state 36
+    LT    shift, and go to state 37
+    LE    shift, and go to state 38
+    AND   shift, and go to state 39
+    OR    shift, and go to state 40
+    '\n'  shift, and go to state 41
+
+
+State 17
+
+   23 expression: assign_expression .
+
+    $default  reduce using rule 23 (expression)
+
+
+State 18
+
+   37 expression: value_expression .
+
+    $default  reduce using rule 37 (expression)
+
+
+State 19
+
+   38 assign_expression: identifier . ASSIGN expression
+   42 value_expression: identifier .
+
+    ASSIGN  shift, and go to state 42
+
+    $default  reduce using rule 42 (value_expression)
+
+
+State 20
+
+   10 declare_statement: VAR identifier . COLON type
+   11                  | VAR identifier . COLON type ASSIGN expression
+
+    COLON  shift, and go to state 43
+
+
+State 21
+
+   15 if_statement: IF if_header . block elseif_list ELSE block
+
+    LC  shift, and go to state 44
+
+    block  go to state 45
+
+
+State 22
+
+   16 if_header: expression .
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    $default  reduce using rule 16 (if_header)
+
+
+State 23
+
+   20 for_statement: FOR for_header . block
+
+    LC  shift, and go to state 44
+
+    block  go to state 46
+
+
+State 24
+
+   21 for_header: expression . SEMI expression SEMI expression
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD   shift, and go to state 28
+    SUB   shift, and go to state 29
+    MUL   shift, and go to state 30
+    DIV   shift, and go to state 31
+    MOD   shift, and go to state 32
+    EQ    shift, and go to state 33
+    NE    shift, and go to state 34
+    GT    shift, and go to state 35
+    GE    shift, and go to state 36
+    LT    shift, and go to state 37
+    LE    shift, and go to state 38
+    AND   shift, and go to state 39
+    OR    shift, and go to state 40
+    SEMI  shift, and go to state 47
+
+
+State 25
+
+   22 puts_statemnt: PUTS expression .
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    $default  reduce using rule 22 (puts_statemnt)
+
+
+State 26
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 27
+
+    4 statement_list: statement_list statement .
+
+    $default  reduce using rule 4 (statement_list)
+
+
+State 28
+
+   27 expression: expression ADD . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 48
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 29
+
+   28 expression: expression SUB . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 49
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 30
+
+   24 expression: expression MUL . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 50
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 31
+
+   25 expression: expression DIV . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 51
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 32
+
+   26 expression: expression MOD . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 52
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 33
+
+   33 expression: expression EQ . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 53
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 34
+
+   34 expression: expression NE . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 54
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 35
+
+   31 expression: expression GT . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 55
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 36
+
+   32 expression: expression GE . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 56
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 37
+
+   29 expression: expression LT . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 57
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 38
+
+   30 expression: expression LE . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 58
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 39
+
+   35 expression: expression AND . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 59
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 40
+
+   36 expression: expression OR . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 60
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 41
+
+    9 statement: expression '\n' .
+
+    $default  reduce using rule 9 (statement)
+
+
+State 42
+
+   38 assign_expression: identifier ASSIGN . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 61
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 43
+
+   10 declare_statement: VAR identifier COLON . type
+   11                  | VAR identifier COLON . type ASSIGN expression
+
+    INT     shift, and go to state 62
+    DOUBLE  shift, and go to state 63
+    STRING  shift, and go to state 64
+
+    type  go to state 65
+
+
+State 44
+
+    2 block: LC . statement_list RC
+
+    VAR              shift, and go to state 1
+    IF               shift, and go to state 2
+    FOR              shift, and go to state 3
+    PUTS             shift, and go to state 4
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    statement_list     go to state 66
+    statement          go to state 11
+    declare_statement  go to state 12
+    if_statement       go to state 13
+    for_statement      go to state 14
+    puts_statemnt      go to state 15
+    expression         go to state 16
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 45
+
+   15 if_statement: IF if_header block . elseif_list ELSE block
+
+    $default  reduce using rule 17 (elseif_list)
+
+    elseif_list  go to state 67
+
+
+State 46
+
+   20 for_statement: FOR for_header block .
+
+    $default  reduce using rule 20 (for_statement)
+
+
+State 47
+
+   21 for_header: expression SEMI . expression SEMI expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 68
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 48
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   27           | expression ADD expression .
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 27 (expression)]
+    SUB       [reduce using rule 27 (expression)]
+    MUL       [reduce using rule 27 (expression)]
+    DIV       [reduce using rule 27 (expression)]
+    MOD       [reduce using rule 27 (expression)]
+    EQ        [reduce using rule 27 (expression)]
+    NE        [reduce using rule 27 (expression)]
+    GT        [reduce using rule 27 (expression)]
+    GE        [reduce using rule 27 (expression)]
+    LT        [reduce using rule 27 (expression)]
+    LE        [reduce using rule 27 (expression)]
+    AND       [reduce using rule 27 (expression)]
+    OR        [reduce using rule 27 (expression)]
+    $default  reduce using rule 27 (expression)
+
+
+State 49
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   28           | expression SUB expression .
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 28 (expression)]
+    SUB       [reduce using rule 28 (expression)]
+    MUL       [reduce using rule 28 (expression)]
+    DIV       [reduce using rule 28 (expression)]
+    MOD       [reduce using rule 28 (expression)]
+    EQ        [reduce using rule 28 (expression)]
+    NE        [reduce using rule 28 (expression)]
+    GT        [reduce using rule 28 (expression)]
+    GE        [reduce using rule 28 (expression)]
+    LT        [reduce using rule 28 (expression)]
+    LE        [reduce using rule 28 (expression)]
+    AND       [reduce using rule 28 (expression)]
+    OR        [reduce using rule 28 (expression)]
+    $default  reduce using rule 28 (expression)
+
+
+State 50
+
+   24 expression: expression . MUL expression
+   24           | expression MUL expression .
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 24 (expression)]
+    SUB       [reduce using rule 24 (expression)]
+    MUL       [reduce using rule 24 (expression)]
+    DIV       [reduce using rule 24 (expression)]
+    MOD       [reduce using rule 24 (expression)]
+    EQ        [reduce using rule 24 (expression)]
+    NE        [reduce using rule 24 (expression)]
+    GT        [reduce using rule 24 (expression)]
+    GE        [reduce using rule 24 (expression)]
+    LT        [reduce using rule 24 (expression)]
+    LE        [reduce using rule 24 (expression)]
+    AND       [reduce using rule 24 (expression)]
+    OR        [reduce using rule 24 (expression)]
+    $default  reduce using rule 24 (expression)
+
+
+State 51
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   25           | expression DIV expression .
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 25 (expression)]
+    SUB       [reduce using rule 25 (expression)]
+    MUL       [reduce using rule 25 (expression)]
+    DIV       [reduce using rule 25 (expression)]
+    MOD       [reduce using rule 25 (expression)]
+    EQ        [reduce using rule 25 (expression)]
+    NE        [reduce using rule 25 (expression)]
+    GT        [reduce using rule 25 (expression)]
+    GE        [reduce using rule 25 (expression)]
+    LT        [reduce using rule 25 (expression)]
+    LE        [reduce using rule 25 (expression)]
+    AND       [reduce using rule 25 (expression)]
+    OR        [reduce using rule 25 (expression)]
+    $default  reduce using rule 25 (expression)
+
+
+State 52
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   26           | expression MOD expression .
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 26 (expression)]
+    SUB       [reduce using rule 26 (expression)]
+    MUL       [reduce using rule 26 (expression)]
+    DIV       [reduce using rule 26 (expression)]
+    MOD       [reduce using rule 26 (expression)]
+    EQ        [reduce using rule 26 (expression)]
+    NE        [reduce using rule 26 (expression)]
+    GT        [reduce using rule 26 (expression)]
+    GE        [reduce using rule 26 (expression)]
+    LT        [reduce using rule 26 (expression)]
+    LE        [reduce using rule 26 (expression)]
+    AND       [reduce using rule 26 (expression)]
+    OR        [reduce using rule 26 (expression)]
+    $default  reduce using rule 26 (expression)
+
+
+State 53
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   33           | expression EQ expression .
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 33 (expression)]
+    SUB       [reduce using rule 33 (expression)]
+    MUL       [reduce using rule 33 (expression)]
+    DIV       [reduce using rule 33 (expression)]
+    MOD       [reduce using rule 33 (expression)]
+    EQ        [reduce using rule 33 (expression)]
+    NE        [reduce using rule 33 (expression)]
+    GT        [reduce using rule 33 (expression)]
+    GE        [reduce using rule 33 (expression)]
+    LT        [reduce using rule 33 (expression)]
+    LE        [reduce using rule 33 (expression)]
+    AND       [reduce using rule 33 (expression)]
+    OR        [reduce using rule 33 (expression)]
+    $default  reduce using rule 33 (expression)
+
+
+State 54
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   34           | expression NE expression .
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 34 (expression)]
+    SUB       [reduce using rule 34 (expression)]
+    MUL       [reduce using rule 34 (expression)]
+    DIV       [reduce using rule 34 (expression)]
+    MOD       [reduce using rule 34 (expression)]
+    EQ        [reduce using rule 34 (expression)]
+    NE        [reduce using rule 34 (expression)]
+    GT        [reduce using rule 34 (expression)]
+    GE        [reduce using rule 34 (expression)]
+    LT        [reduce using rule 34 (expression)]
+    LE        [reduce using rule 34 (expression)]
+    AND       [reduce using rule 34 (expression)]
+    OR        [reduce using rule 34 (expression)]
+    $default  reduce using rule 34 (expression)
+
+
+State 55
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   31           | expression GT expression .
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 31 (expression)]
+    SUB       [reduce using rule 31 (expression)]
+    MUL       [reduce using rule 31 (expression)]
+    DIV       [reduce using rule 31 (expression)]
+    MOD       [reduce using rule 31 (expression)]
+    EQ        [reduce using rule 31 (expression)]
+    NE        [reduce using rule 31 (expression)]
+    GT        [reduce using rule 31 (expression)]
+    GE        [reduce using rule 31 (expression)]
+    LT        [reduce using rule 31 (expression)]
+    LE        [reduce using rule 31 (expression)]
+    AND       [reduce using rule 31 (expression)]
+    OR        [reduce using rule 31 (expression)]
+    $default  reduce using rule 31 (expression)
+
+
+State 56
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   32           | expression GE expression .
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 32 (expression)]
+    SUB       [reduce using rule 32 (expression)]
+    MUL       [reduce using rule 32 (expression)]
+    DIV       [reduce using rule 32 (expression)]
+    MOD       [reduce using rule 32 (expression)]
+    EQ        [reduce using rule 32 (expression)]
+    NE        [reduce using rule 32 (expression)]
+    GT        [reduce using rule 32 (expression)]
+    GE        [reduce using rule 32 (expression)]
+    LT        [reduce using rule 32 (expression)]
+    LE        [reduce using rule 32 (expression)]
+    AND       [reduce using rule 32 (expression)]
+    OR        [reduce using rule 32 (expression)]
+    $default  reduce using rule 32 (expression)
+
+
+State 57
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   29           | expression LT expression .
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 29 (expression)]
+    SUB       [reduce using rule 29 (expression)]
+    MUL       [reduce using rule 29 (expression)]
+    DIV       [reduce using rule 29 (expression)]
+    MOD       [reduce using rule 29 (expression)]
+    EQ        [reduce using rule 29 (expression)]
+    NE        [reduce using rule 29 (expression)]
+    GT        [reduce using rule 29 (expression)]
+    GE        [reduce using rule 29 (expression)]
+    LT        [reduce using rule 29 (expression)]
+    LE        [reduce using rule 29 (expression)]
+    AND       [reduce using rule 29 (expression)]
+    OR        [reduce using rule 29 (expression)]
+    $default  reduce using rule 29 (expression)
+
+
+State 58
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   30           | expression LE expression .
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 30 (expression)]
+    SUB       [reduce using rule 30 (expression)]
+    MUL       [reduce using rule 30 (expression)]
+    DIV       [reduce using rule 30 (expression)]
+    MOD       [reduce using rule 30 (expression)]
+    EQ        [reduce using rule 30 (expression)]
+    NE        [reduce using rule 30 (expression)]
+    GT        [reduce using rule 30 (expression)]
+    GE        [reduce using rule 30 (expression)]
+    LT        [reduce using rule 30 (expression)]
+    LE        [reduce using rule 30 (expression)]
+    AND       [reduce using rule 30 (expression)]
+    OR        [reduce using rule 30 (expression)]
+    $default  reduce using rule 30 (expression)
+
+
+State 59
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   35           | expression AND expression .
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 35 (expression)]
+    SUB       [reduce using rule 35 (expression)]
+    MUL       [reduce using rule 35 (expression)]
+    DIV       [reduce using rule 35 (expression)]
+    MOD       [reduce using rule 35 (expression)]
+    EQ        [reduce using rule 35 (expression)]
+    NE        [reduce using rule 35 (expression)]
+    GT        [reduce using rule 35 (expression)]
+    GE        [reduce using rule 35 (expression)]
+    LT        [reduce using rule 35 (expression)]
+    LE        [reduce using rule 35 (expression)]
+    AND       [reduce using rule 35 (expression)]
+    OR        [reduce using rule 35 (expression)]
+    $default  reduce using rule 35 (expression)
+
+
+State 60
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+   36           | expression OR expression .
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 36 (expression)]
+    SUB       [reduce using rule 36 (expression)]
+    MUL       [reduce using rule 36 (expression)]
+    DIV       [reduce using rule 36 (expression)]
+    MOD       [reduce using rule 36 (expression)]
+    EQ        [reduce using rule 36 (expression)]
+    NE        [reduce using rule 36 (expression)]
+    GT        [reduce using rule 36 (expression)]
+    GE        [reduce using rule 36 (expression)]
+    LT        [reduce using rule 36 (expression)]
+    LE        [reduce using rule 36 (expression)]
+    AND       [reduce using rule 36 (expression)]
+    OR        [reduce using rule 36 (expression)]
+    $default  reduce using rule 36 (expression)
+
+
+State 61
+
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+   38 assign_expression: identifier ASSIGN expression .
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    ADD       [reduce using rule 38 (assign_expression)]
+    SUB       [reduce using rule 38 (assign_expression)]
+    MUL       [reduce using rule 38 (assign_expression)]
+    DIV       [reduce using rule 38 (assign_expression)]
+    MOD       [reduce using rule 38 (assign_expression)]
+    EQ        [reduce using rule 38 (assign_expression)]
+    NE        [reduce using rule 38 (assign_expression)]
+    GT        [reduce using rule 38 (assign_expression)]
+    GE        [reduce using rule 38 (assign_expression)]
+    LT        [reduce using rule 38 (assign_expression)]
+    LE        [reduce using rule 38 (assign_expression)]
+    AND       [reduce using rule 38 (assign_expression)]
+    OR        [reduce using rule 38 (assign_expression)]
+    $default  reduce using rule 38 (assign_expression)
+
+
+State 62
+
+   12 type: INT .
+
+    $default  reduce using rule 12 (type)
+
+
+State 63
+
+   13 type: DOUBLE .
+
+    $default  reduce using rule 13 (type)
+
+
+State 64
+
+   14 type: STRING .
+
+    $default  reduce using rule 14 (type)
+
+
+State 65
+
+   10 declare_statement: VAR identifier COLON type .
+   11                  | VAR identifier COLON type . ASSIGN expression
+
+    ASSIGN  shift, and go to state 69
+
+    $default  reduce using rule 10 (declare_statement)
+
+
+State 66
+
+    2 block: LC statement_list . RC
+    4 statement_list: statement_list . statement
+
+    RC               shift, and go to state 70
+    VAR              shift, and go to state 1
+    IF               shift, and go to state 2
+    FOR              shift, and go to state 3
+    PUTS             shift, and go to state 4
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    statement          go to state 27
+    declare_statement  go to state 12
+    if_statement       go to state 13
+    for_statement      go to state 14
+    puts_statemnt      go to state 15
+    expression         go to state 16
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 67
+
+   15 if_statement: IF if_header block elseif_list . ELSE block
+   18 elseif_list: elseif_list . elseif
+
+    ELSE  shift, and go to state 71
+
+    elseif  go to state 72
+
+
+State 68
+
+   21 for_header: expression SEMI expression . SEMI expression
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD   shift, and go to state 28
+    SUB   shift, and go to state 29
+    MUL   shift, and go to state 30
+    DIV   shift, and go to state 31
+    MOD   shift, and go to state 32
+    EQ    shift, and go to state 33
+    NE    shift, and go to state 34
+    GT    shift, and go to state 35
+    GE    shift, and go to state 36
+    LT    shift, and go to state 37
+    LE    shift, and go to state 38
+    AND   shift, and go to state 39
+    OR    shift, and go to state 40
+    SEMI  shift, and go to state 73
+
+
+State 69
+
+   11 declare_statement: VAR identifier COLON type ASSIGN . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 74
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 70
+
+    2 block: LC statement_list RC .
+
+    $default  reduce using rule 2 (block)
+
+
+State 71
+
+   15 if_statement: IF if_header block elseif_list ELSE . block
+   19 elseif: ELSE . IF if_header block
+
+    LC  shift, and go to state 44
+    IF  shift, and go to state 75
+
+    block  go to state 76
+
+
+State 72
+
+   18 elseif_list: elseif_list elseif .
+
+    $default  reduce using rule 18 (elseif_list)
+
+
+State 73
+
+   21 for_header: expression SEMI expression SEMI . expression
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    expression         go to state 77
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 74
+
+   11 declare_statement: VAR identifier COLON type ASSIGN expression .
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    $default  reduce using rule 11 (declare_statement)
+
+
+State 75
+
+   19 elseif: ELSE IF . if_header block
+
+    IDENTIFIER       shift, and go to state 5
+    INTEGER_LITERAL  shift, and go to state 6
+    DOUBLE_LITERAL   shift, and go to state 7
+    STRING_LITERAL   shift, and go to state 8
+
+    if_header          go to state 78
+    expression         go to state 22
+    assign_expression  go to state 17
+    value_expression   go to state 18
+    identifier         go to state 19
+
+
+State 76
+
+   15 if_statement: IF if_header block elseif_list ELSE block .
+
+    $default  reduce using rule 15 (if_statement)
+
+
+State 77
+
+   21 for_header: expression SEMI expression SEMI expression .
+   24 expression: expression . MUL expression
+   25           | expression . DIV expression
+   26           | expression . MOD expression
+   27           | expression . ADD expression
+   28           | expression . SUB expression
+   29           | expression . LT expression
+   30           | expression . LE expression
+   31           | expression . GT expression
+   32           | expression . GE expression
+   33           | expression . EQ expression
+   34           | expression . NE expression
+   35           | expression . AND expression
+   36           | expression . OR expression
+
+    ADD  shift, and go to state 28
+    SUB  shift, and go to state 29
+    MUL  shift, and go to state 30
+    DIV  shift, and go to state 31
+    MOD  shift, and go to state 32
+    EQ   shift, and go to state 33
+    NE   shift, and go to state 34
+    GT   shift, and go to state 35
+    GE   shift, and go to state 36
+    LT   shift, and go to state 37
+    LE   shift, and go to state 38
+    AND  shift, and go to state 39
+    OR   shift, and go to state 40
+
+    $default  reduce using rule 21 (for_header)
+
+
+State 78
+
+   19 elseif: ELSE IF if_header . block
+
+    LC  shift, and go to state 44
+
+    block  go to state 79
+
+
+State 79
+
+   19 elseif: ELSE IF if_header block .
+
+    $default  reduce using rule 19 (elseif)

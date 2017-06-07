@@ -1,0 +1,12 @@
+var i:int
+for i = 0;i <= 100;i=i+1 {
+    if i % 3 == 0 && i % 5 == 0{
+        puts "FizzBuzz\n"
+    }else if i % 3 == 0{
+        puts "Fizz\n"
+    }else if i % 5 == 0{
+        puts "Fizz\n"
+    }else{
+       puts i + "\n"
+    }
+}
