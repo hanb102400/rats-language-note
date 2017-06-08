@@ -16,14 +16,9 @@ typedef struct {
     Value value;
 } Variable;
 
-//type
-typedef enum {
-    VALUE_EXPRESSION = 1,
-    ASSIGN_EXPRESSION,
-    OPER_EXPRESSION,
-    LOGIC_EXPRESSION,
-    MINUS_EXPRESSION
-} ExpressionType;
+/**
+ * Expression
+ */
 
 typedef enum {
    ADD_OPER = 1,
@@ -36,47 +31,83 @@ typedef enum {
    GT_OPER,
    GE_OPER,
    LT_OPER,
-   LE_OPER
+   LE_OPER,
+   ADD_OPER,
+   OR_OPER
 } OperType;
 
-typedef enum {
-   AND_LOGIC = 1,
-   OR_LOGIC,
-   NOT_LOGIC,
-} LogicType;
-
-//expression
 typedef struct {
-   int line_number;
-   ExpressionType type;
-   union {
-       Value value;
-       AssignExpression assgin_expression;
-       OperExpression oper_expression;
-       LogicExpression logic_expression;
-       MinusExpression minus_expression;
-   } u;
+   OperType  type;
+   Expression* left;
+   Expression* right;
 } Expression;
 
-//assign expression
-typedef struct {
-    Variable* variable;
-    Expression* expr;
-} AssignExpression;
 
-//oper expression
 typedef struct {
-    OperType  type;
-    Expression* left;
-    Expression* right;
-} OperExpression;
+   OperType  type;
+   Expression* left;
+   Expression* right;
+} Expression;
 
-//logic expression
+/**
+ * Stmt
+ */
+typedef struct Stmt_Tag Stmt;
+typedef struct StmtList_Tag StmtList;
+struct StmtList_Tag {
+    int            size;
+    Stmt           *statement;
+    StmtList       *next;
+};
+
 typedef struct {
-    LogicType  type;
-    Expression* left;
-    Expression* right;
-} LogicExpression;
+    StmtList *stmtList;
+} Block;
+
+typedef struct {
+    char* variable;
+    Expression* operand;
+} DeclareStmt;
+
+typedef struct {
+    Expression  *condition;
+    Block       *thenBlock;
+    Block       *elseBlock;
+} IfStmt;
+
+struct Stmt_Tag {
+   StatementType       type;
+   union {
+       Expression       *exprStatement;       //表达式语句
+       DeclareStmt      *declareStmt;    //声明语句
+       IfStmt           *ifStmt;         //if语句
+       PutsStmt         *putsStmt
+   } stmt;
+};
+
+/**
+ * Node
+ */
+typedef enum  {
+    NODE_IDENTIFIER = 1,
+    NODE_VALUE,
+    NODE_EXPRESSION, 
+    NODE_STATEMENT,
+} NodeType;
+
+typedef	struct Node_Tag Node;
+struct Node_Tag{
+    Node *left;
+    Node *right;
+    NodeType nodeType;
+    union {
+      char *identifier;
+      Value *value;
+      Expression *assignExpression;
+      BinaryExpression *binaryExpression;
+    } v;
+} ;
+
 
 Expression* parse_program();
 Expression* parse_assgin_expression(Variable* variable, Expression* expr);

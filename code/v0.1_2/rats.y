@@ -13,8 +13,8 @@
 
 %token ADD SUB MUL DIV MOD
 %token EQ NE GT GE LT LE AND OR
-%token SEMI COLON  ASSIGN LP RP LC RC
-%token VAR IF ELSE FOR
+%token ASSIGN LP RP LC RC SEMI COLON
+%token VAR IF ELSE FOR 
 %token INT DOUBLE STRING
 %token PUTS
 
@@ -23,35 +23,44 @@
 %token <double_value>   DOUBLE_LITERAL
 %token <string_value>   STRING_LITERAL
 
-%type   <expression>        expression  assign_expression value_expression
-%type   <statement>         statement declare_statement  if_statement  for_statement puts_statemnt
-%type   <statement_list>    statement_list
-%type   <block>             block
+%type   <expression>   expression  assign_expression value_expression
+%type   <stmt>         stmt simple_stmt compound_stmt declare_stmt  if_stmt for_stmt puts_stmt
+%type   <stmt_list>    stmt_list
+%type   <block>        block
 
 %%
 
 program: 
-    statement_list 
+    stmt_list 
     ;
 
 block: 
-    LC statement_list RC
+    LC stmt_list RC
     ;
 
-statement_list: 
-    statement
-    | statement_list  statement
+stmt_list: 
+    stmt
+    | stmt_list  stmt
     ;
 
-statement:
-    puts_statemnt 
-    | declare_statement 
-    | if_statement
-    | for_statement 
-    |  expression '\n'
+stmt:
+    simple_stmt 
+    |compound_stmt
     ;
 
-declare_statement:
+simple_stmt:
+    {printf("nil stmt\n");}
+    | puts_stmt
+    | declare_stmt
+    | expression
+    ;
+
+compound_stmt:
+    | if_stmt
+    | for_stmt 
+    ;
+
+declare_stmt:
     VAR identifier COLON type 
     |VAR identifier COLON type ASSIGN expression 
     ;
@@ -68,7 +77,7 @@ type:
     } 
     ; 
     
-if_statement: 
+if_stmt: 
     IF if_header block elseif_list ELSE block
     ;  
 if_header:
@@ -81,13 +90,13 @@ elseif:
      ELSE IF if_header block
      ;
 
-for_statement:
+for_stmt:
     FOR for_header block   
     ;
 for_header:
     expression SEMI expression SEMI expression
     ;
-puts_statemnt:
+puts_stmt:
     PUTS expression {
         printf("PUTS\n");
     }
@@ -123,7 +132,7 @@ value_expression:
         printf("<DOUBLE_LITERAL:%lf>\n",$1);
     }  
     | STRING_LITERAL {
-        printf("<STRING_LITERAL:%lf>\n",$1);
+        printf("<STRING_LITERAL>\n");
     } 
     | identifier
     ;
